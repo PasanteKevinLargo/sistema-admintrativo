@@ -189,6 +189,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -215,31 +244,37 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
       disabled: true,
       modal: 0,
       //modal data modificado por el pasante 
-      ID_CLIEN: 0,
-      IP_PUBLICA: "",
-      NOMBRE_CLIENTE: "",
-      NOM_BASE_DATOS: "",
-      RUC_CLIEN: "",
-      DIRECCION_CLIEN: "",
-      CORREO_CLIEN: "",
-      arrayCLientes: [],
+      ID_CONTRATOS: 0,
+      ID_clientes: "",
+      ID_servicios: "",
+      FECHA_DESDE: "",
+      FECHA_HASTA: "",
+      HORA_DESDE: "",
+      HORA_HASTA: "",
+      TARIFA_CONTRATOS: "",
+      TIPO_PAGO: "",
+      VALOR_TARIFA: "",
+      arrayContratos: [],
       //fin modal data-----
       errorPersona: 0,
       errorMostrarMsjPersona: [],
       //table data
       tableData: [],
       columns: [//modificado por el pasante 
-      'IP_PUBLICA', 'NOMBRE_CLIENTE', 'NOM_BASE_DATOS', 'RUC_CLIEN', 'DIRECCION_CLIEN', 'CORREO_CLIEN', "accion"],
+      'ID_clientes', 'ID_servicios', 'FECHA_DESDE', 'FECHA_HASTA', 'HORA_DESDE', 'HORA_HASTA', 'TARIFA_CONTRATOS', 'TIPO_PAGO', 'VALOR_TARIFA', "accion"],
       options: {
         filterable: false,
         headings: {
           //modificado por el pasante 
-          IP_PUBLICA: "IP Publica",
-          NOMBRE_CLIENTE: "Nombre del Cliente",
-          NOM_BASE_DATOS: "Base de datos",
-          RUC_CLIEN: "Ruc",
-          DIRECCION_CLIEN: "Direccion",
-          CORREO_CLIEN: "Correo"
+          ID_clientes: "Clientes",
+          ID_servicios: "Servicios",
+          FECHA_DESDE: "Fecha de inicio",
+          FECHA_HASTA: "Fecha de Finalizacion",
+          HORA_DESDE: "Hora de inicio",
+          HORA_HASTA: "Hora de finalizacion",
+          TARIFA_CONTRATOS: "Tarifa",
+          TIPO_PAGO: "Metodo de pago",
+          VALOR_TARIFA: "Valor Tarifa"
         },
         templates: {}
       },
@@ -314,7 +349,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
     },
     ListarRegistros: function ListarRegistros(page, buscar) {
       var me = this;
-      var url = "/clientes/index?page=" + page + "&buscar=" + buscar;
+      var url = "/contratos/index?page=" + page + "&buscar=" + buscar;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         me.tableData = respuesta.registros.data;
@@ -333,13 +368,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
       var me = this;
 
       if (this.tituloaccion == "Guardar") {
-        axios.post("/clientes/registrar", {
-          IP_PUBLICA: this.IP_PUBLICA,
-          NOMBRE_CLIENTE: this.NOMBRE_CLIENTE,
-          NOM_BASE_DATOS: this.NOM_BASE_DATOS,
-          RUC_CLIEN: this.RUC_CLIEN,
-          DIRECCION_CLIEN: this.DIRECCION_CLIEN,
-          CORREO_CLIEN: this.CORREO_CLIEN
+        axios.post("/contratos/registrar", {
+          ID_clientes: this.ID_clientes,
+          ID_servicios: this.ID_servicios,
+          FECHA_DESDE: this.FECHA_DESDE,
+          FECHA_HASTA: this.FECHA_HASTA,
+          HORA_DESDE: this.HORA_DESDE,
+          HORA_HASTA: this.HORA_HASTA,
+          TARIFA_CONTRATOS: this.TARIFA_CONTRATOS,
+          TIPO_PAGO: this.TIPO_PAGO,
+          VALOR_TARIFA: this.VALOR_TARIFA
         }).then(function (response) {
           me.ListarRegistros(1, "");
           me.msjform("Correcto", "Grabado exitosamente", "success");
@@ -352,14 +390,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
           me.msjform("Registro ya existe", "No se ha registrado", "danger");
         });
       } else if (this.tituloaccion == "Actualizar") {
-        axios.put("/clientes/actualizar", {
-          id: this.ID_CLIEN,
-          IP_PUBLICA: this.IP_PUBLICA,
-          NOMBRE_CLIENTE: this.NOMBRE_CLIENTE,
-          NOM_BASE_DATOS: this.NOM_BASE_DATOS,
-          RUC_CLIEN: this.RUC_CLIEN,
-          DIRECCION_CLIEN: this.DIRECCION_CLIEN,
-          CORREO_CLIEN: this.CORREO_CLIEN
+        axios.put("/contratos/actualizar", {
+          id: this.ID_CONTRATOS,
+          ID_clientes: this.ID_clientes,
+          ID_servicios: this.ID_servicios,
+          FECHA_DESDE: this.FECHA_DESDE,
+          FECHA_HASTA: this.FECHA_HASTA,
+          HORA_DESDE: this.HORA_DESDE,
+          HORA_HASTA: this.HORA_HASTA,
+          TARIFA_CONTRATOS: this.TARIFA_CONTRATOS,
+          TIPO_PAGO: this.TIPO_PAGO,
+          VALOR_TARIFA: this.VALOR_TARIFA
         }).then(function (response) {
           me.ListarRegistros(1, "");
           me.msjform("Correcto", "Actualizado exitosamente", "success");
@@ -400,8 +441,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
           /*Modificado por el pasante y psd: recordar modificar de manera correcta*/
           this.titulomodal1 = "Visualizar";
           this.tituloaccion = "Visualizar";
-          this.ID_CLIEN = row.ID_CLIEN;
-          this.IP_PUBLICA = row.IP_PUBLICA, this.NOMBRE_CLIENTE = row.NOMBRE_CLIENTE, this.NOM_BASE_DATOS = row.NOM_BASE_DATOS, this.RUC_CLIEN = row.RUC_CLIEN, this.DIRECCION_CLIEN = row.DIRECCION_CLIEN, this.CORREO_CLIEN = row.CORREO_CLIEN, this.disabled = true;
+          this.ID_CONTRATOS = row.ID_CONTRATOS;
+          this.ID_clientes = row.ID_clientes, this.ID_servicios = row.ID_servicios, this.FECHA_DESDE = row.FECHA_DESDE, this.FECHA_HASTA = row.FECHA_HASTA, this.HORA_DESDE = row.HORA_DESDE, this.HORA_HASTA = row.HORA_HASTA, this.TARIFA_CONTRATOS = row.TARIFA_CONTRATOS, this.TIPO_PAGO = row.TIPO_PAGO, this.VALOR_TARIFA = row.VALOR_TARIFA, this.disabled = true;
           break;
 
         case 3:
@@ -412,16 +453,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(bootstrap_vue__WEBPACK_IMPORTED_M
       }
     },
     borrarFormulario: function borrarFormulario() {
-      this.IP_PUBLICA = "";
-      this.NOMBRE_CLIENTE = "";
-      this.NOM_BASE_DATOS = "";
-      this.RUC_CLIEN = "";
-      this.DIRECCION_CLIEN = "";
-      this.CORREO_CLIEN = "";
+      this.ID_clientes = "";
+      this.ID_servicios = "";
+      this.FECHA_DESDE = "";
+      this.FECHA_HASTA = "";
+      this.HORA_DESDE = "";
+      this.HORA_HASTA = "";
+      this.TARIFA_CONTRATOS = "";
+      this.TIPO_PAGO = "";
+      this.VALOR_TARIFA = "";
     },
     deleteRegistro: function deleteRegistro(idregistro) {
       var me = this;
-      axios.post("/clientes/destroy", {
+      axios.post("/contratos/destroy", {
         id: idregistro
       }).then(function (response) {
         me.ListarRegistros(1, "");
@@ -463,7 +507,7 @@ var render = function() {
           _vm._v("Administrador /")
         ]),
         _vm._v(" "),
-        _vm._v("\n    Clientes \n    "),
+        _vm._v("\n    Contratos \n    "),
         _c(
           "button",
           {
@@ -574,7 +618,7 @@ var render = function() {
                         },
                         on: {
                           click: function($event) {
-                            return _vm.deleteRegistro(props.row.ID_CLIEN)
+                            return _vm.deleteRegistro(props.row.ID_CONTRATOS)
                           }
                         }
                       },
@@ -634,7 +678,7 @@ var render = function() {
                     "\n        " + _vm._s(_vm.titulomodal1) + "\n        "
                   ),
                   _c("span", { staticClass: "font-weight-light" }, [
-                    _vm._v("CLientes")
+                    _vm._v("Contratos")
                   ]),
                   _vm._v(" "),
                   _vm.tituloaccion == "Visualizar"
@@ -663,20 +707,20 @@ var render = function() {
                 [
                   _c(
                     "b-form-group",
-                    { staticClass: "col-6", attrs: { label: "Ip Publica" } },
+                    { staticClass: "col-6", attrs: { label: "Clientes" } },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Ip Publica",
+                          placeholder: "Clientes",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.IP_PUBLICA,
+                          value: _vm.ID_clientes,
                           callback: function($$v) {
-                            _vm.IP_PUBLICA = $$v
+                            _vm.ID_clientes = $$v
                           },
-                          expression: "IP_PUBLICA"
+                          expression: "ID_clientes"
                         }
                       })
                     ],
@@ -685,20 +729,20 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "b-form-group",
-                    { staticClass: "col-6", attrs: { label: "Nombres" } },
+                    { staticClass: "col-6", attrs: { label: "Servicios" } },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Nombres del cliente",
+                          placeholder: "Servicios",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.NOMBRE_CLIENTE,
+                          value: _vm.ID_servicios,
                           callback: function($$v) {
-                            _vm.NOMBRE_CLIENTE = $$v
+                            _vm.ID_servicios = $$v
                           },
-                          expression: "NOMBRE_CLIENTE"
+                          expression: "ID_servicios"
                         }
                       })
                     ],
@@ -715,21 +759,21 @@ var render = function() {
                     "b-form-group",
                     {
                       staticClass: "col-6",
-                      attrs: { label: "Nombre de la base" }
+                      attrs: { label: "Fecha de inicio" }
                     },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Nombre de la base",
+                          placeholder: "Fecha de inicio",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.NOM_BASE_DATOS,
+                          value: _vm.FECHA_DESDE,
                           callback: function($$v) {
-                            _vm.NOM_BASE_DATOS = $$v
+                            _vm.FECHA_DESDE = $$v
                           },
-                          expression: "NOM_BASE_DATOS"
+                          expression: "FECHA_DESDE"
                         }
                       })
                     ],
@@ -738,20 +782,23 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "b-form-group",
-                    { staticClass: "col-6", attrs: { label: "Ruc" } },
+                    {
+                      staticClass: "col-6",
+                      attrs: { label: "Fecha de Finalizacion" }
+                    },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Ruc del cliente",
+                          placeholder: "Fecha de Finalizacion",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.RUC_CLIEN,
+                          value: _vm.FECHA_HASTA,
                           callback: function($$v) {
-                            _vm.RUC_CLIEN = $$v
+                            _vm.FECHA_HASTA = $$v
                           },
-                          expression: "RUC_CLIEN"
+                          expression: "FECHA_HASTA"
                         }
                       })
                     ],
@@ -766,20 +813,23 @@ var render = function() {
                 [
                   _c(
                     "b-form-group",
-                    { staticClass: "col-6", attrs: { label: "Direccion" } },
+                    {
+                      staticClass: "col-6",
+                      attrs: { label: "Hora de inicio" }
+                    },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Direccion del cliente",
+                          placeholder: "Hora de inicio",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.DIRECCION_CLIEN,
+                          value: _vm.HORA_DESDE,
                           callback: function($$v) {
-                            _vm.DIRECCION_CLIEN = $$v
+                            _vm.HORA_DESDE = $$v
                           },
-                          expression: "DIRECCION_CLIEN"
+                          expression: "HORA_DESDE"
                         }
                       })
                     ],
@@ -788,20 +838,101 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "b-form-group",
-                    { staticClass: "col-6", attrs: { label: "Correo" } },
+                    {
+                      staticClass: "col-6",
+                      attrs: { label: "Hora de Finalizacion" }
+                    },
                     [
                       _c("b-input", {
                         ref: "descripcion",
                         attrs: {
-                          placeholder: "Correo del cliente",
+                          placeholder: "Hora del Finalizacion",
                           disabled: _vm.disabled
                         },
                         model: {
-                          value: _vm.CORREO_CLIEN,
+                          value: _vm.HORA_HASTA,
                           callback: function($$v) {
-                            _vm.CORREO_CLIEN = $$v
+                            _vm.HORA_HASTA = $$v
                           },
-                          expression: "CORREO_CLIEN"
+                          expression: "HORA_HASTA"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-form-row",
+                [
+                  _c(
+                    "b-form-group",
+                    { staticClass: "col-4", attrs: { label: "Tarifa" } },
+                    [
+                      _c("b-input", {
+                        ref: "descripcion",
+                        attrs: {
+                          placeholder: "Hora de inicio",
+                          disabled: _vm.disabled
+                        },
+                        model: {
+                          value: _vm.TARIFA_CONTRATOS,
+                          callback: function($$v) {
+                            _vm.TARIFA_CONTRATOS = $$v
+                          },
+                          expression: "TARIFA_CONTRATOS"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "col-4",
+                      attrs: { label: "Metodo de pago" }
+                    },
+                    [
+                      _c("b-input", {
+                        ref: "descripcion",
+                        attrs: {
+                          placeholder: "Hora del Finalizacion",
+                          disabled: _vm.disabled
+                        },
+                        model: {
+                          value: _vm.TIPO_PAGO,
+                          callback: function($$v) {
+                            _vm.TIPO_PAGO = $$v
+                          },
+                          expression: "TIPO_PAGO"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-form-group",
+                    {
+                      staticClass: "col-4",
+                      attrs: { label: "Valor de la tarifa" }
+                    },
+                    [
+                      _c("b-input", {
+                        ref: "descripcion",
+                        attrs: {
+                          placeholder: "Hora de inicio",
+                          disabled: _vm.disabled
+                        },
+                        model: {
+                          value: _vm.VALOR_TARIFA,
+                          callback: function($$v) {
+                            _vm.VALOR_TARIFA = $$v
+                          },
+                          expression: "VALOR_TARIFA"
                         }
                       })
                     ],

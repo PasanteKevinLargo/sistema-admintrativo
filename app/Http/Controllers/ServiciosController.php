@@ -72,7 +72,7 @@ class ServiciosController extends Controller
         if (!$request->ajax()) {
             return redirect('/');
         }
-        $actualizar = Servicio::findOrFail($request->id);
+        $actualizar = Servicios::findOrFail($request->id);
         $actualizar->NOMBRE_SERVICIOS= $request-> NOMBRE_SERVICIOS;
         $actualizar->TARIFA_SERVICIOS= $request-> TARIFA_SERVICIOS;
         $actualizar->TIPO_PERIODO= $request-> TIPO_PERIODO;

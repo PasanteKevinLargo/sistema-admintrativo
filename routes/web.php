@@ -182,12 +182,20 @@ Route::group(['middleware'=>['auth']],function(){
     Route::put('/clientes/actualizar', 'ClientesController@update');
     Route::post('/clientes/destroy', 'ClientesController@destroy');
 
-    //Ruta de clientes agregado por el pasante 
+    //Ruta de servicios agregado por el pasante 
     Route::get('/servicios/selectServicios', 'ServiciosController@selectServicios');
     Route::get('/servicios/index', 'ServiciosController@index');
     Route::post('/servicios/registrar', 'ServiciosController@store');
     Route::put('/servicios/actualizar', 'ServiciosController@update');
     Route::post('/servicios/destroy', 'ServiciosController@destroy');
+
+     //Ruta de contratos agregado por el pasante 
+     Route::get('/contratos/selectContratos', 'ContratosController@selectContratos');
+     Route::get('/contratos/index', 'ContratosController@index');
+     Route::post('/contratos/registrar', 'ContratosController@store');
+     Route::put('/contratos/actualizar', 'ContratosController@update');
+     Route::post('/contratos/destroy', 'ContratosController@destroy');
+ 
 
 
 });

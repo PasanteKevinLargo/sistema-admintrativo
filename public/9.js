@@ -634,7 +634,7 @@ var render = function() {
                     "\n        " + _vm._s(_vm.titulomodal1) + "\n        "
                   ),
                   _c("span", { staticClass: "font-weight-light" }, [
-                    _vm._v("CLientes")
+                    _vm._v("Clientes")
                   ]),
                   _vm._v(" "),
                   _vm.tituloaccion == "Visualizar"

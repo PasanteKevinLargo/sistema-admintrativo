@@ -77,7 +77,7 @@
       >
         <div slot="modal-title">
           {{ titulomodal1 }}
-          <span class="font-weight-light">CLientes</span>
+          <span class="font-weight-light">Clientes</span>
           <b-btn
             variant="outline-success borderless icon-btn"
             class="btn-m"

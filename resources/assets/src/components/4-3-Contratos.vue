@@ -3,7 +3,7 @@
     <h4 class="font-weight-bold py-3 mb-4">
       <span class="text-muted font-weight-light">Administrador /</span>
       <!--Modificado por el pasante-->
-      Clientes 
+      Contratos 
       <button
         type="button"
         class="btn btn-sm btn-success"
@@ -46,7 +46,7 @@
           <b-btn
             variant="outline-danger borderless icon-btn"
             class="btn-xs"
-            @click="deleteRegistro(props.row.ID_CLIEN)"
+            @click="deleteRegistro(props.row.ID_CONTRATOS)"
             ><i class="ion ion-md-trash"></i
           ></b-btn>
         </div>
@@ -77,7 +77,7 @@
       >
         <div slot="modal-title">
           {{ titulomodal1 }}
-          <span class="font-weight-light">CLientes</span>
+          <span class="font-weight-light">Contratos</span>
           <b-btn
             variant="outline-success borderless icon-btn"
             class="btn-m"
@@ -89,19 +89,19 @@
           <!-- Modificado por el pasante -->
           </div>
             <b-form-row>
-              <b-form-group label="Ip Publica" class="col-6">
+              <b-form-group label="Clientes" class="col-6">
                 <b-input
-                  v-model="IP_PUBLICA"
-                  placeholder="Ip Publica"
+                  v-model="ID_clientes"
+                  placeholder="Clientes"
                   ref="descripcion"
                   :disabled="disabled"
                 />
                </b-form-group>
 
-              <b-form-group label="Nombres" class="col-6">
+              <b-form-group label="Servicios" class="col-6">
                 <b-input
-                  v-model="NOMBRE_CLIENTE"
-                  placeholder="Nombres del cliente"
+                  v-model="ID_servicios"
+                  placeholder="Servicios"
                   ref="descripcion"
                   :disabled="disabled"
                 />
@@ -109,19 +109,19 @@
            </b-form-row>
 
            <b-form-row>
-              <b-form-group label="Nombre de la base" class="col-6">
+              <b-form-group label="Fecha de inicio" class="col-6">
                 <b-input
-                  v-model="NOM_BASE_DATOS"
-                  placeholder="Nombre de la base"
+                  v-model="FECHA_DESDE"
+                  placeholder="Fecha de inicio"
                   ref="descripcion"
                   :disabled="disabled"
                 />
                </b-form-group>
 
-              <b-form-group label="Ruc" class="col-6">
+              <b-form-group label="Fecha de Finalizacion" class="col-6">
                 <b-input
-                  v-model="RUC_CLIEN"
-                  placeholder="Ruc del cliente"
+                  v-model="FECHA_HASTA"
+                  placeholder="Fecha de Finalizacion"
                   ref="descripcion"
                   :disabled="disabled"
                 />
@@ -129,23 +129,52 @@
            </b-form-row>
 
            <b-form-row>
-              <b-form-group label="Direccion" class="col-6">
+              <b-form-group label="Hora de inicio" class="col-6">
                 <b-input
-                  v-model="DIRECCION_CLIEN"
-                  placeholder="Direccion del cliente"
+                  v-model="HORA_DESDE"
+                  placeholder="Hora de inicio"
                   ref="descripcion"
                   :disabled="disabled"
                 />
                </b-form-group>
 
-              <b-form-group label="Correo" class="col-6">
+              <b-form-group label="Hora de Finalizacion" class="col-6">
                 <b-input
-                  v-model="CORREO_CLIEN"
-                  placeholder="Correo del cliente"
+                  v-model="HORA_HASTA"
+                  placeholder="Hora del Finalizacion"
                   ref="descripcion"
                   :disabled="disabled"
                 />
               </b-form-group>
+           </b-form-row>
+
+           <b-form-row>
+              <b-form-group label="Tarifa" class="col-4">
+                <b-input
+                  v-model="TARIFA_CONTRATOS"
+                  placeholder="Hora de inicio"
+                  ref="descripcion"
+                  :disabled="disabled"
+                />
+               </b-form-group>
+
+              <b-form-group label="Metodo de pago" class="col-4">
+                <b-input
+                  v-model="TIPO_PAGO"
+                  placeholder="Hora del Finalizacion"
+                  ref="descripcion"
+                  :disabled="disabled"
+                />
+              </b-form-group>
+
+              <b-form-group label="Valor de la tarifa" class="col-4">
+                <b-input
+                  v-model="VALOR_TARIFA"
+                  placeholder="Hora de inicio"
+                  ref="descripcion"
+                  :disabled="disabled"
+                />
+               </b-form-group>
            </b-form-row>
 
             <div v-show="errorPersona" class="form-group row div-error">
@@ -193,14 +222,17 @@ export default {
     disabled: true,
     modal: 0,
     //modal data modificado por el pasante 
-    ID_CLIEN: 0,
-    IP_PUBLICA: "",
-    NOMBRE_CLIENTE: "",
-    NOM_BASE_DATOS: "",
-    RUC_CLIEN: "",
-    DIRECCION_CLIEN: "",
-    CORREO_CLIEN: "",
-    arrayCLientes:[],
+    ID_CONTRATOS: 0,
+    ID_clientes: "",
+    ID_servicios: "",
+    FECHA_DESDE: "",
+    FECHA_HASTA: "",
+    HORA_DESDE: "",
+    HORA_HASTA: "",
+    TARIFA_CONTRATOS: "",
+    TIPO_PAGO: "",
+    VALOR_TARIFA: "",
+    arrayContratos:[],
    
     //fin modal data-----
     errorPersona: 0,
@@ -209,24 +241,30 @@ export default {
     tableData: [],
     columns: [
       //modificado por el pasante 
-      'IP_PUBLICA',
-      'NOMBRE_CLIENTE',
-      'NOM_BASE_DATOS',
-      'RUC_CLIEN',
-      'DIRECCION_CLIEN',
-      'CORREO_CLIEN',
+      'ID_clientes',
+      'ID_servicios',
+      'FECHA_DESDE',
+      'FECHA_HASTA',
+      'HORA_DESDE',
+      'HORA_HASTA',
+      'TARIFA_CONTRATOS',
+      'TIPO_PAGO',
+      'VALOR_TARIFA',
       "accion",
     ],
     options: {
       filterable: false,
       headings: {
         //modificado por el pasante 
-        IP_PUBLICA: "IP Publica",
-        NOMBRE_CLIENTE: "Nombre del Cliente",
-        NOM_BASE_DATOS: "Base de datos",
-        RUC_CLIEN: "Ruc",
-        DIRECCION_CLIEN: "Direccion",
-        CORREO_CLIEN: "Correo",
+        ID_clientes: "Clientes",
+        ID_servicios: "Servicios",
+        FECHA_DESDE: "Fecha de inicio",
+        FECHA_HASTA: "Fecha de Finalizacion",
+        HORA_DESDE: "Hora de inicio",
+        HORA_HASTA: "Hora de finalizacion",
+        TARIFA_CONTRATOS: "Tarifa",
+        TIPO_PAGO: "Metodo de pago",
+        VALOR_TARIFA: "Valor Tarifa",
       },
       templates: {},
     },
@@ -295,7 +333,7 @@ export default {
     },
     ListarRegistros(page, buscar) {
       let me = this;
-      var url = "/clientes/index?page=" + page + "&buscar=" + buscar;
+      var url = "/contratos/index?page=" + page + "&buscar=" + buscar;
       axios
         .get(url)
         .then(function (response) {
@@ -318,13 +356,16 @@ export default {
       let me = this;
       if (this.tituloaccion == "Guardar") {
         axios
-          .post("/clientes/registrar", {
-            IP_PUBLICA: this.IP_PUBLICA,
-            NOMBRE_CLIENTE: this.NOMBRE_CLIENTE,
-            NOM_BASE_DATOS: this.NOM_BASE_DATOS,
-            RUC_CLIEN: this.RUC_CLIEN,
-            DIRECCION_CLIEN: this.DIRECCION_CLIEN,
-            CORREO_CLIEN: this.CORREO_CLIEN,
+          .post("/contratos/registrar", {
+            ID_clientes: this.ID_clientes,
+            ID_servicios: this.ID_servicios,
+            FECHA_DESDE: this.FECHA_DESDE,
+            FECHA_HASTA: this.FECHA_HASTA,
+            HORA_DESDE: this.HORA_DESDE,
+            HORA_HASTA: this.HORA_HASTA,
+            TARIFA_CONTRATOS: this.TARIFA_CONTRATOS,
+            TIPO_PAGO: this.TIPO_PAGO,
+            VALOR_TARIFA: this.VALOR_TARIFA,
           })
           .then(function (response) {
             me.ListarRegistros(1, "");
@@ -340,14 +381,17 @@ export default {
           });
       } else if (this.tituloaccion == "Actualizar") {
         axios
-          .put("/clientes/actualizar", {
-            id: this.ID_CLIEN,
-            IP_PUBLICA: this.IP_PUBLICA,
-            NOMBRE_CLIENTE: this.NOMBRE_CLIENTE,
-            NOM_BASE_DATOS: this.NOM_BASE_DATOS,
-            RUC_CLIEN: this.RUC_CLIEN,
-            DIRECCION_CLIEN: this.DIRECCION_CLIEN,
-            CORREO_CLIEN: this.CORREO_CLIEN,
+          .put("/contratos/actualizar", {
+            id: this.ID_CONTRATOS,
+            ID_clientes: this.ID_clientes,
+            ID_servicios: this.ID_servicios,
+            FECHA_DESDE: this.FECHA_DESDE,
+            FECHA_HASTA: this.FECHA_HASTA,
+            HORA_DESDE: this.HORA_DESDE,
+            HORA_HASTA: this.HORA_HASTA,
+            TARIFA_CONTRATOS: this.TARIFA_CONTRATOS,
+            TIPO_PAGO: this.TIPO_PAGO,
+            VALOR_TARIFA: this.VALOR_TARIFA,
           })
           .then(function (response) {
             me.ListarRegistros(1, "");
@@ -397,13 +441,16 @@ export default {
           /*Modificado por el pasante y psd: recordar modificar de manera correcta*/
           this.titulomodal1 = "Visualizar";
           this.tituloaccion = "Visualizar";
-          this.ID_CLIEN= row.ID_CLIEN ;
-          this.IP_PUBLICA = row.IP_PUBLICA,
-          this.NOMBRE_CLIENTE = row.NOMBRE_CLIENTE,
-          this.NOM_BASE_DATOS = row.NOM_BASE_DATOS,
-          this.RUC_CLIEN = row.RUC_CLIEN,
-          this.DIRECCION_CLIEN = row.DIRECCION_CLIEN,
-          this.CORREO_CLIEN = row.CORREO_CLIEN,
+          this.ID_CONTRATOS= row.ID_CONTRATOS ;
+          this.ID_clientes = row.ID_clientes,
+          this.ID_servicios = row.ID_servicios,
+          this.FECHA_DESDE = row.FECHA_DESDE,
+          this.FECHA_HASTA = row.FECHA_HASTA,
+          this.HORA_DESDE = row.HORA_DESDE,
+          this.HORA_HASTA = row.HORA_HASTA,
+          this.TARIFA_CONTRATOS = row.TARIFA_CONTRATOS,
+          this.TIPO_PAGO = row.TIPO_PAGO,
+          this.VALOR_TARIFA = row.VALOR_TARIFA,
           this.disabled = true;
 
           break;
@@ -415,17 +462,20 @@ export default {
       }
     },
     borrarFormulario() {
-      this.IP_PUBLICA = "";
-      this.NOMBRE_CLIENTE = "";
-      this.NOM_BASE_DATOS = "";
-      this.RUC_CLIEN = "";
-      this.DIRECCION_CLIEN = "";
-      this.CORREO_CLIEN = "";
+      this.ID_clientes = "";
+      this.ID_servicios = "";
+      this.FECHA_DESDE = "";
+      this.FECHA_HASTA = "";
+      this.HORA_DESDE = "";
+      this.HORA_HASTA = "";
+      this.TARIFA_CONTRATOS = "";
+      this.TIPO_PAGO = "";
+      this.VALOR_TARIFA = "";
     },
     deleteRegistro(idregistro) {
       let me = this;
       axios
-        .post("/clientes/destroy", {
+        .post("/contratos/destroy", {
           id: idregistro,
         })
         .then(function (response) {
